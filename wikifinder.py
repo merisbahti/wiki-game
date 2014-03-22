@@ -1,9 +1,9 @@
 #Gets a wiki site based on article name, name must start with /wiki/ 
 def getwikisite(name):
     import urllib.request
-    print(name)
     return urllib.request.urlopen("http://en.wikipedia.org"+name).read()
 
+# Get all links except ones that contain a dot or colon. (Avoid non-articles)
 def get_links(doc):
     from bs4 import BeautifulSoup 
     from bs4 import BeautifulSoup, SoupStrainer
@@ -13,7 +13,7 @@ def get_links(doc):
             l.append(link['href'])
     return l
 
-# Traverse this bitch. The Idea is that the highest amount of steps is 8
+# Recursive function
 def search(link, visited_links, target, steps = 0, chain = None): 
     steps = 1+steps
     if steps > 8:
@@ -25,7 +25,6 @@ def search(link, visited_links, target, steps = 0, chain = None):
     print(chain)
     links = get_links(getwikisite((link))) 
     visited_links.append(link)
-    #print(visited_links)
     if (target in links):
         print("Found target")
         return (chain+"->"+target, steps)
@@ -35,7 +34,6 @@ def search(link, visited_links, target, steps = 0, chain = None):
                 result = search(newlink, visited_links, target, steps, chain)
                 if result is not None:
                     return result
-        print("Done a whole level")
         return None
             
 

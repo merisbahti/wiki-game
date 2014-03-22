@@ -14,17 +14,17 @@ def get_links(doc):
     return l
 
 # Recursive function
-def search(link, visited_links, target, steps = 0, chain = None): 
+def search(start, target, steps = 0, chain = None, visited_links = []): 
     steps = 1+steps
     if steps > 8:
         return None 
     if chain is None:
         chain = link
     else:
-        chain = chain + "->" + link
+        chain = chain + "->" + start
     print(chain)
-    links = get_links(getwikisite((link))) 
-    visited_links.append(link)
+    links = get_links(getwikisite((start))) 
+    visited_links.append(start)
     if (target in links):
         print("Found target")
         return (chain+"->"+target, steps)
@@ -37,4 +37,4 @@ def search(link, visited_links, target, steps = 0, chain = None):
         return None
             
 
-print(search("/wiki/Cream_liqueur", [], "/wiki/Hitler", 0))
+print(search("/wiki/Cream_liqueur", "/wiki/Hitler"))

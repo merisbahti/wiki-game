@@ -1,5 +1,5 @@
 # Wiki Game 
-A crawler who checks the length between two articles on wikipedia.
+A crawler who checks the length between two articles on wikipedia in the most stupid way imaginable.
 
 For more info see [Six Degrees of Wikipedia](http://en.wikipedia.org/wiki/Wikipedia:Six_degrees_of_Wikipedia#Rules).
 
